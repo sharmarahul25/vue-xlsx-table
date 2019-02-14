@@ -1957,6 +1957,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     return {
       rawFile: null,
       workbook: null,
+      fileName: '',
       tableData: {
         header: [],
         body: []
@@ -1984,6 +1985,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return;
       }
       this.rawFile = e.target.files[0];
+      this.fileName = this.rawFile.name;
       this.fileConvertToWorkbook(this.rawFile).then(function (workbook) {
         var xlsxArr = __WEBPACK_IMPORTED_MODULE_0_xlsx___default.a.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]]);
         _this.workbook = workbook;
@@ -2079,6 +2081,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       this.tableData.header = header;
       this.tableData.body = data;
+      this.tableData.fileName = this.fileName;
       this.$emit('on-select-file', this.tableData);
     },
     handleUploadBtnClick: function handleUploadBtnClick() {

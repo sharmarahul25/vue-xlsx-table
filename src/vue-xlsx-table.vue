@@ -16,6 +16,7 @@ export default {
     return {
       rawFile: null,
       workbook: null,
+      fileName:'',
       tableData: {
         header: [],
         body: []
@@ -39,7 +40,8 @@ export default {
       if (this.rawFile !== null) {
         return
       }
-      this.rawFile = e.target.files[0]
+      this.rawFile = e.target.files[0];
+      this.fileName = this.rawFile.name;
       this.fileConvertToWorkbook(this.rawFile)
         .then((workbook) => {
           let xlsxArr = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]])
@@ -127,8 +129,9 @@ export default {
       return xlsxArr
     },
     initTable ( {data, header} ) {
-      this.tableData.header = header
-      this.tableData.body = data
+      this.tableData.header = header;
+      this.tableData.body = data;
+      this.tableData.fileName = this.fileName;
       this.$emit('on-select-file', this.tableData)
     },
     handleUploadBtnClick () {
